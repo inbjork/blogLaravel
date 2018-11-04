@@ -11,16 +11,19 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', 'PagesController@home');
 
-    $posts = App\Post::latest('published_at')->get();
+Route::get('home', 'HomeController@index');
 
-    return view('welcome', compact('posts'));
-});
-
-Route::get('home', function(){
-    return view('admin.dashboard');
-})->middleware('auth');
+//rutas de administracion
+Route::group([
+    'prefix'=>'admin',
+    'namespace'=>'Admin',
+    'middleware'=>'auth'],
+    function(){
+        Route::get('posts', 'PostsController@index')->name('admin.posts.index');
+    }
+);
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
