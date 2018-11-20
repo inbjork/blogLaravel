@@ -14,7 +14,8 @@
 
 @section('content')
 <div class="row">
-    <form>
+    <form method="POST" action="{{route('admin.posts.store')}}">
+    {{ csrf_field() }}
         <div class="col-md-8">
             <div class="box box-primary">
                 
@@ -28,6 +29,7 @@
                                 <textarea 
                                     rows="10"
                                     name="body" 
+                                    id="editor"
                                     class="form-control" 
                                     placeholder="Ingresa aqui el Contenido de la publicacion">
                                 </textarea> 
@@ -50,10 +52,22 @@
                     </div>
                     <div class="form-group">
                         <label>Categorias</label>
-                        <select class="form-control">
+                        <select name="category" class="form-control">
                             <option value="">Selecciona una categoria</option>
                             @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Etiquetas</label>
+                        <select name="tags[]" class="form-control select2"
+                            multiple="multiple"
+                            data-placeholder="Selecciona unas o mas etiquetas" 
+                            style="width: 100%;">
+
+                            @foreach ($tags as $tag)
+                                <option value="{{$tag->id}}">{{$tag->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -76,14 +90,26 @@
 @endsection
 
 @push('styles')
+    <!-- Select2 -->
+    <link rel="stylesheet" href="/adminlte/bower_components/select2/dist/css/select2.min.css">
+    <!-- Date Picker -->
     <link rel="stylesheet" href="/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 @endpush
 
 @push('scripts')
 
+    <!-- Select2 -->
+    <script src="/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
+    <!-- CK Editor -->
+    <script src="/adminlte/bower_components/ckeditor/ckeditor.js"></script>
+    <!-- Date Picker -->
     <script src="/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     
     <script>
+        //Initialize Select2 Elements
+        $('.select2').select2()
+        //CK Editor
+        CKEDITOR.replace('editor')
         //Date picker
         $('#datepicker').datepicker({
             autoclose: true
