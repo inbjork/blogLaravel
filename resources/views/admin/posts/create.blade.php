@@ -14,27 +14,29 @@
 
 @section('content')
 <div class="row">
-    <form>
-        <div class="col-md-8">
-            <div class="box box-primary">
-                
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label>Titulo de la publicacion</label>
-                            <input name="title" class="form-control" placeholder="Ingresa aqui el titulo de la publicacion">
-                        </div>
-                        <div class="form-group">
-                                <label>Contenido de la publicacion</label>
-                                <textarea 
-                                    rows="10"
-                                    name="body" 
-                                    class="form-control" 
-                                    placeholder="Ingresa aqui el Contenido de la publicacion">
-                                </textarea> 
-                            </div>
+<form method="POST" action="{{route('admin.posts.store')}}">
+    {{ csrf_field() }}
+
+    <div class="col-md-8">
+        <div class="box box-primary">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label>Titulo de la publicacion</label>
+                        <input name="title" class="form-control" placeholder="Ingresa aqui el titulo de la publicacion">
                     </div>
-            </div>
+                    <div class="form-group">
+                            <label>Contenido de la publicacion</label>
+                            <textarea 
+                                rows="10"
+                                name="body"
+                                id="editor" 
+                                class="form-control" 
+                                placeholder="Ingresa aqui el Contenido de la publicacion">
+                            </textarea> 
+                        </div>
+                </div>
         </div>
+    </div>
         <div class="col-md-4">
             <div class="box box-primary">
                 <div class="box-body">
@@ -50,10 +52,24 @@
                     </div>
                     <div class="form-group">
                         <label>Categorias</label>
-                        <select class="form-control">
+                        <select name="category" class="form-control">
                             <option value="">Selecciona una categoria</option>
                             @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Etiquetas</label>
+                        <select 
+                            name="tags[]"
+                            class="form-control select2" 
+                            multiple="multiple" 
+                            data-placeholder="Selecciona una o mas etiquetas"
+                            style="width: 100%;"
+                        >
+                            @foreach ($tags as $tag)
+                                <option value="{{$tag->id}}">{{$tag->name}}</option>   
                             @endforeach
                         </select>
                     </div>
@@ -76,11 +92,14 @@
 @endsection
 
 @push('styles')
+    <link rel="stylesheet" href="/adminlte/bower_components/select2/dist/css/select2.min.css">
     <link rel="stylesheet" href="/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 @endpush
 
 @push('scripts')
 
+    <script src="/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
+    <script src="/adminlte/bower_components/ckeditor/ckeditor.js"></script>
     <script src="/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     
     <script>
@@ -88,8 +107,12 @@
         $('#datepicker').datepicker({
             autoclose: true
         })
+        //ckeditor para texto enriquesido
+        CKEDITOR.replace('editor')
+        //select2 para etiquetas
+        $('.select2').select2()
     </script>
-
+    
 @endpush
 
     
