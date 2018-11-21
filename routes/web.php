@@ -13,8 +13,6 @@
 
 Route::get('/', 'PagesController@home');
 
-
-
 //rutas de administracion
 Route::group([
     'prefix'=>'admin',

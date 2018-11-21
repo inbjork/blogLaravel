@@ -19,7 +19,8 @@ class PostsController extends Controller
     }
 
     public function create(){
-
+        
+        $tags = Tag::all();
         $categories = Category::all();
         $tags = tag::all();
 
@@ -42,6 +43,8 @@ class PostsController extends Controller
 
         return back()->with('flash', 'Tu Publicacion ha sido Creada!! =)');
 
+        $post->tags()->attach($request->get('tags'));
+        return back()->with('flash', 'Tu publicacion ha sido creada');
     }
 }
 
