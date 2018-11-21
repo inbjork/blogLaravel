@@ -16,36 +16,35 @@
 <div class="row">
     <form method="POST" action="{{route('admin.posts.store')}}">
     {{ csrf_field() }}
-        <div class="col-md-8">
-            <div class="box box-primary">
-                
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label>Titulo de la publicacion</label>
-                            <input name="title" class="form-control" placeholder="Ingresa aqui el titulo de la publicacion">
-                        </div>
-                        <div class="form-group">
-                                <label>Contenido de la publicacion</label>
-                                <textarea 
-                                    rows="10"
-                                    name="body" 
-                                    id="editor"
-                                    class="form-control" 
-                                    placeholder="Ingresa aqui el Contenido de la publicacion">
-                                </textarea> 
-                            </div>
-                    </div>
-                    <div class="form-group">
-                            <label>Contenido de la publicacion</label>
-                            <textarea 
-                                rows="10"
-                                name="body"
-                                id="editor" 
-                                class="form-control" 
-                                placeholder="Ingresa aqui el Contenido de la publicacion">
-                            </textarea> 
-                        </div>
+    <div class="col-md-8">
+        <div class="box box-primary">
+            
+            <div class="box-body">
+                <div class="form-group {{$errors->has('title') ? 'has-error' : ''}}">
+                    <label>Titulo de la publicacion</label>
+                    <input 
+                        name="title" 
+                        class="form-control"
+                        value="{{old('title')}}" 
+                        placeholder="Ingresa aqui el titulo de la publicacion"
+                    >
+                    {!!$errors->first('title', '<span class="help-block">:message</span>')!!}
+                    
                 </div>
+                <div class="form-group {{$errors->has('body') ? 'has-error' : ''}}">
+                    <label>Contenido de la publicacion</label>
+                    <textarea 
+                        rows="10"
+                        name="body" 
+                        id="editor"
+                        class="form-control" 
+                        placeholder="Ingresa aqui el Contenido de la publicacion"
+                    >
+                    {{old('body')}}
+                    </textarea>
+                    {!!$errors->first('body', '<span class="help-block">:message</span>')!!}
+                </div>
+            </div>
         </div>
     </div>
         <div class="col-md-4">
@@ -58,17 +57,29 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input name="published_at" type="text" class="form-control pull-right" id="datepicker">
+                            <input 
+                                name="published_at" 
+                                type="text"
+                                value="{{old('published_at')}}"
+                                class="form-control pull-right" 
+                                id="datepicker"
+                            >
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('category') ? 'has-error' : ''}}">
                         <label>Categorias</label>
                         <select name="category" class="form-control">
                             <option value="">Selecciona una categoria</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option 
+                                    value="{{ $category->id }}"
+                                    {{old('category') == $category->id ? 'selected' : ''}}
+                                >
+                                {{ $category->name }}
+                                </option>
                             @endforeach
                         </select>
+                        {!!$errors->first('category', '<span class="help-block">:message</span>')!!}
                     </div>
                     <div class="form-group">
                         <label>Etiquetas</label>
@@ -82,27 +93,14 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Etiquetas</label>
-                        <select 
-                            name="tags[]"
-                            class="form-control select2" 
-                            multiple="multiple" 
-                            data-placeholder="Selecciona una o mas etiquetas"
-                            style="width: 100%;"
-                        >
-                            @foreach ($tags as $tag)
-                                <option value="{{$tag->id}}">{{$tag->name}}</option>   
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('excerpt') ? 'has-error' : ''}}">
                         <label>Extracto de la publicacion</label>
                         <textarea 
                             name="excerpt" 
                             class="form-control" 
                             placeholder="Ingresa aqui el Extracto de la publicacion">
                         </textarea>
+                        {!!$errors->first('excerpt', '<span class="help-block">:message</span>')!!}
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block">Guardar Publicacion</button>
@@ -115,28 +113,19 @@
 @endsection
 
 @push('styles')
-<<<<<<< HEAD
-    <link rel="stylesheet" href="/adminlte/bower_components/select2/dist/css/select2.min.css">
-=======
     <!-- Select2 -->
     <link rel="stylesheet" href="/adminlte/bower_components/select2/dist/css/select2.min.css">
     <!-- Date Picker -->
->>>>>>> 8042a2db707e9328fbc96e3e1c08d8a7035ee0e6
     <link rel="stylesheet" href="/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 @endpush
 
 @push('scripts')
 
-<<<<<<< HEAD
-    <script src="/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
-    <script src="/adminlte/bower_components/ckeditor/ckeditor.js"></script>
-=======
     <!-- Select2 -->
     <script src="/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
     <!-- CK Editor -->
     <script src="/adminlte/bower_components/ckeditor/ckeditor.js"></script>
     <!-- Date Picker -->
->>>>>>> 8042a2db707e9328fbc96e3e1c08d8a7035ee0e6
     <script src="/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     
     <script>
@@ -148,18 +137,6 @@
         $('#datepicker').datepicker({
             autoclose: true
         })
-        //ckeditor para texto enriquesido
-        CKEDITOR.replace('editor')
-        //select2 para etiquetas
-        $('.select2').select2()
     </script>
-    
+
 @endpush
-
-    
-
-
-
-
-    
-
