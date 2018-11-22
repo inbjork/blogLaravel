@@ -115,28 +115,19 @@
 @endsection
 
 @push('styles')
-<<<<<<< HEAD
-    <link rel="stylesheet" href="/adminlte/bower_components/select2/dist/css/select2.min.css">
-=======
     <!-- Select2 -->
     <link rel="stylesheet" href="/adminlte/bower_components/select2/dist/css/select2.min.css">
     <!-- Date Picker -->
->>>>>>> 8042a2db707e9328fbc96e3e1c08d8a7035ee0e6
     <link rel="stylesheet" href="/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 @endpush
 
 @push('scripts')
 
-<<<<<<< HEAD
-    <script src="/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
-    <script src="/adminlte/bower_components/ckeditor/ckeditor.js"></script>
-=======
     <!-- Select2 -->
     <script src="/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
     <!-- CK Editor -->
     <script src="/adminlte/bower_components/ckeditor/ckeditor.js"></script>
     <!-- Date Picker -->
->>>>>>> 8042a2db707e9328fbc96e3e1c08d8a7035ee0e6
     <script src="/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     
     <script>
