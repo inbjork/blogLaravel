@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PagesController@home');
+Route::get('blog/{id}', 'PostsController@show');
 
 //rutas de administracion
 Route::group([
