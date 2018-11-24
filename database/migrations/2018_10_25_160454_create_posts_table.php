@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->timestamps();
 
             //misTablas
+            $table->string('url');
             $table->string('title');
             $table->mediumText('excerpt');
             $table->text('body');

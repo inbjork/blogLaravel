@@ -40,6 +40,7 @@ class PostsController extends Controller
         //return $request->all();
         $post = new Post;
         $post->title = $request->get('title');
+        $post->url = str_slug($request->get('title'));
         $post->excerpt = $request->get('excerpt');
         $post->title = $request->get('title');
         $post->body = $request->get('body');

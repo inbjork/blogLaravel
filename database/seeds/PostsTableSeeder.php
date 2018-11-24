@@ -37,6 +37,7 @@ class PostsTableSeeder extends Seeder
 
         $post = new Post;
         $post->title = "mi primer post";
+        $post->url = str_slug("mi primer post");
         $post->excerpt = "Extracto de mi primer post";
         $post->body = "<p>cuerpo de mi primer post</p>";
         $post->category_id = 1;
@@ -45,6 +46,7 @@ class PostsTableSeeder extends Seeder
 
         $post = new Post;
         $post->title = "mi segundo post";
+        $post->url = str_slug("mi segundo post");
         $post->excerpt = "Extracto de mi segundo post";
         $post->body = "<p>cuerpo de mi segundo post</p>";
         $post->category_id = 2;
@@ -53,6 +55,7 @@ class PostsTableSeeder extends Seeder
 
         $post = new Post;
         $post->title = "mi tercer post";
+        $post->url = str_slug("mi tercer post");
         $post->excerpt = "Extracto de mi tercer post";
         $post->body = "<p>cuerpo de mi tercer post</p>";
         $post->category_id = 1;
@@ -61,6 +64,7 @@ class PostsTableSeeder extends Seeder
 
         $post = new Post;
         $post->title = "mi cuarto post";
+        $post->url = str_slug("mi cuarto post");
         $post->excerpt = "Extracto de mi cuarto post";
         $post->body = "<p>cuerpo de mi cuarto post</p>";
         $post->category_id = 2;
