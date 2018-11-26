@@ -267,7 +267,22 @@ a.btn-bar{
           right: 7px;
           
       }
-      
-      
+
+/* cambios personales */
+
+.buttons-social-media-share{
+	margin-bottom: 20px;
+}
+
+.buttons-social-media-share .share-buttons{
+	margin: 0px;
+	padding: 0px;
+}
+
+.buttons-social-media-share .share-buttons li{
+	list-style-type: none;
+	float: left;
+	margin-right: 10px;
+}      
 
 

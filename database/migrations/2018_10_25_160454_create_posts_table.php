@@ -20,9 +20,9 @@ class CreatePostsTable extends Migration
             //misTablas
             $table->string('url');
             $table->string('title');
-            $table->mediumText('excerpt');
-            $table->text('body');
-            $table->unsignedInteger('category_id');
+            $table->mediumText('excerpt')->nullable();
+            $table->text('body')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
             $table->timestamp('published_at')->nullable();
         });
     }

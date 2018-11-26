@@ -20,7 +20,11 @@
                 <i class="fa fa-eye"></i> Ver todos los Posts
             </a>
         </li>
-        <li {{ request()->is('admin/posts/create') ? 'class=active' : '' }}><a href="{{ route('admin.posts.create') }}"><i class="fa fa-pencil"></i> Crear un Post</a></li>
+        <li>
+            <a href="#" data-toggle="modal" data-target="#exampleModal">
+                <i class="fa fa-pencil"></i> Crear un Post
+            </a>
+        </li>
     </ul>
     </li>
 </ul>
